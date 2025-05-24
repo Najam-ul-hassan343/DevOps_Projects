@@ -89,6 +89,89 @@ To exit from the web server we enter exit
 
 When users submit queries to the web server, PHP is used to dynamically display the contents of our webpage.
 
+Run **sudo apt install php-fpm php-mysql**
+
+PHP-fpm is an acronym for PHP.  A web technology called FastCGI Process Manager is used to handle massive loads at once, improving a website's performance.
+
+![11](https://github.com/user-attachments/assets/344b04d5-0d9d-4ff7-894c-0a1f8f0b9c11)
+
+### Building Our Web Application's Web Server Block
+
+Within the **/var/www/** directory, we build a directory for our project in order to serve our web content on our web server.
+
+**sudo mkdir /var/www/myweb**  Next, we set the myweb directory's permissions to the current user system.
+
+![12](https://github.com/user-attachments/assets/878be547-47c9-4d89-9aca-ee490bfbee8b)
+
+Now we download the wordpress file in **/tmp** directory from **wget https://wordpress.org/latest.tar.gz**
+
+![13](https://github.com/user-attachments/assets/c2ba717e-f0ca-4284-ad08-2fa7305296aa)
+
+Unzip the file **latest.tar.gz** by using command: **tar -xvzf latest.tar.gz** and move the wordpress directory in **/var/www/myweb** by using command: **sudo mv wordpress /var/www/myweb**
+
+![14](https://github.com/user-attachments/assets/f70acf8a-4c8f-4843-99b8-f200553c97c3)
+![15](https://github.com/user-attachments/assets/5951e214-6eeb-4f99-a1ee-99ea63c63d8d)
+
+**Set permissions:**
+
+**sudo chown -R www-data:www-data /var/www/myweb/wordpress**
+
+**sudo chmod -R 755 /var/www/myweb/wordpress**
+
+![16](https://github.com/user-attachments/assets/3949bb35-72ac-44a1-8c0a-5e47862c4f56)
+
+Putting our server block into configuration
+
+**sudo nano /etc/nginx/sites-available/wordpress**
+
+The setup needed for our web server block to function is shown in the following snippets.
+
+![17](https://github.com/user-attachments/assets/c121d4c2-c000-45db-8ad7-2dd7b7d1c000)
+
+ ### Create a MySQL Database and User for WordPress
+
+Run **sudo mysql -u root -p**
+![18](https://github.com/user-attachments/assets/bce738d1-9820-4908-a12d-41b652a8bf9b)
+
+Inside MySQL prompt:
+
+CREATE DATABASE wordpress;
+
+CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'strongpassword';
+
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'localhost';
+
+FLUSH PRIVILEGES;
+
+EXIT;
+
+![19](https://github.com/user-attachments/assets/26d305ef-f8ec-4290-8a27-634a20ea935d)
+
+The configuration file is subsequently linked to the sites-enabled directory.
+
+**sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled**
+
+To test our configuration for errors we run
+**sudo nginx -t**
+![20](https://github.com/user-attachments/assets/22a56db7-c4ee-412d-a293-5421965270a5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -155,6 +155,13 @@ To test our configuration for errors we run
 **sudo nginx -t**
 ![20](https://github.com/user-attachments/assets/22a56db7-c4ee-412d-a293-5421965270a5)
 
+Paste public IP address on a browser to see content.
+
+**http://public-ip:80**
+
+![21](https://github.com/user-attachments/assets/0d86350d-06c5-4052-b8a3-e9199ef8af73)
+
+
 
 
 
